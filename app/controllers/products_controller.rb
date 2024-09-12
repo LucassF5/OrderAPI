@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/:id
   def update
     if @product.update(product_params)
-      render json: @products
+      render json: @product
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -50,7 +50,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :stock)
+    params.require(:product).permit(:name, :description, :price, :quantity)
   end
 
 end
