@@ -1,4 +1,4 @@
-class CategoryController < ApplicationController
+class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy]
 
   # GET /category
@@ -22,7 +22,7 @@ class CategoryController < ApplicationController
     # puts @category
 
     if @category.save
-      render json: @categories, status: :created
+      render json: @category, status: :created
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class CategoryController < ApplicationController
   # PATCH/PUT /category/:id
   def update
     if @category.update(category_params)
-      render json: @categories
+      render json: @category
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class CategoryController < ApplicationController
   # DELETE /category/:id
   def destroy
     @category.destroy
-    render json: { message: "Produto deletado com sucesso." }
+    render json: { message: "Categoria deletada com sucesso." }
   end
 
   private
