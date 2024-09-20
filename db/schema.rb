@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_17_232344) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_18_142153) do
+  create_table "addresses", force: :cascade do |t|
+    t.string "cep"
+    t.string "rua"
+    t.string "bairro"
+    t.string "cidade"
+    t.string "estado"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -59,6 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_232344) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "categories", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
