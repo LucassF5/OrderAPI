@@ -36,7 +36,7 @@ end
   private
 
   def user_params
-    params.permit(:username, :email, :password)
+    params.permit(:username, :email, :password, :phone_number)
   end
 
   def handle_invalid_record (e)
