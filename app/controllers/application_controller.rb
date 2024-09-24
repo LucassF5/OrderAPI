@@ -10,10 +10,10 @@ class ApplicationController < ActionController::API
     if header
       token = header.split(" ")[1] #.last
         begin
-          JWT.decode(token, "secret", true, algorithm: "HS256") 
+          JWT.decode(token, "secret", true, algorithm: "HS256")
         rescue JWT::DecodeError
           puts "TOKEN ERROR"
-          nilN5PAG
+          nil
         end
     end
   end

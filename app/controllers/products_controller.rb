@@ -14,10 +14,7 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    puts "Current user: #{current_user}"
-    puts "Product params: #{product_params}"
     @product = current_user.products.build(product_params)
-    puts @product
 
     if @product.save
       render json: @product, status: :created
@@ -44,9 +41,7 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    # puts "PASSOU 2"
     @product = current_user.products.find(params[:id])
-    # puts @product
   end
 
   def product_params

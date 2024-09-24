@@ -3,8 +3,6 @@ class CategoriesController < ApplicationController
 
   # GET /category
   def index
-    puts "Current user: #{current_user}"
-    puts "Chegou aqui"
     @categories = current_user.categories # Produtos do usuário atual
     render json: @categories
   end
@@ -16,10 +14,7 @@ class CategoriesController < ApplicationController
 
   # POST /category
   def create
-    # puts "Current user: #{current_user}"
-    # puts "Product params: #{category_params}"
     @category = current_user.categories.build(category_params)
-    # puts @category
 
     if @category.save
       render json: @category, status: :created
@@ -46,9 +41,7 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-    # puts "PASSOU 2"
     @category = current_user.categories.find(params[:id])
-    # puts @category
   end
 
   def category_params

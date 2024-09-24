@@ -10,7 +10,7 @@ class AuthController < ApplicationController
         user: UserSerializer.new(@user),
         token: @token
       }, status: :accepted
-      puts current_user
+      # puts current_user
     else
       render json: { message: "Invalid username or password" }, status: :unauthorized
     end
