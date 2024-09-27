@@ -3,7 +3,7 @@ class AuthController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
 
   def login
-    @user = User.find_by(username: login_params[:username])
+    @user = User.find_by(email: login_params[:email])
     if @user.authenticate(login_params[:password]) # authenticate method comes from Bcrypt
       @token = encode_token(user_id: @user.id)
       render json: {
@@ -12,7 +12,7 @@ class AuthController < ApplicationController
       }, status: :accepted
       # puts current_user
     else
-      render json: { message: "Invalid username or password" }, status: :unauthorized
+      render json: { message: "Invalid email or password" }, status: :unauthorized
     end
   end
 

@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /category
   def index
-    @categories = current_user.categories # Produtos do usuário atual
+    @categories = current_user.store.categories # Produtos do usuário atual
     render json: @categories
   end
 
@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
 
   # POST /category
   def create
-    @category = current_user.categories.build(category_params)
+    @category = current_user.store.categories.create(category_params)
 
     if @category.save
       render json: @category, status: :created
@@ -41,7 +41,7 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-    @category = current_user.categories.find(params[:id])
+    @category = current_user.store.categories.find(params[:id])
   end
 
   def category_params

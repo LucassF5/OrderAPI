@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = current_user.products # Produtos do usuário atual
+    @products = current_user.store.products # Produtos do usuário atual
     render json: @products
   end
 
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    @product = current_user.products.build(product_params)
+    @product = current_user.store.products.create(product_params)
 
     if @product.save
       render json: @product, status: :created
@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = current_user.products.find(params[:id])
+    @product = current_user.store.products.find(params[:id])
   end
 
   def product_params
