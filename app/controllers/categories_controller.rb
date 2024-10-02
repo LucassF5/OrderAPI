@@ -1,9 +1,10 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy]
+  skip_before_action :authorized, only: [:index, :show]
 
   # GET /category
   def index
-    @categories = current_user.store.categories # Produtos do usuário atual
+    @categories = Category.all
     render json: @categories
   end
 
@@ -41,7 +42,7 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-    @category = current_user.store.categories.find(params[:id])
+    @category = Category.find(params[:id])
   end
 
   def category_params

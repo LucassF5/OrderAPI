@@ -1,9 +1,10 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
+  skip_before_action :authorized, only: [:index, :show]
 
   # GET /products
   def index
-    @products = current_user.store.products # Produtos do usuário atual
+    @products = Product.all
     render json: @products
   end
 
@@ -41,7 +42,7 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = current_user.store.products.find(params[:id])
+    @product = Product.find(params[:id])
   end
 
   def product_params

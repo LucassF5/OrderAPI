@@ -1,5 +1,11 @@
 class StoresController < ApplicationController
   # before_action :set_store, only: [:show, :update, :destroy]
+  skip_before_action :authorized, only: [:index, :show]
+  
+  def index
+    @stores = Store.all
+    render json: @stores
+  end
 
   def create
     @store = current_user.create_store(store_params)
@@ -13,11 +19,6 @@ class StoresController < ApplicationController
     else
       render json: {error: "User not authorized to be a store"}, status: :forbidden
     end
-  end
-
-  def index
-    @stores = Store.all
-    render json: @stores
   end
 
   def show
