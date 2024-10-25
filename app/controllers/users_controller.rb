@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create!(user_params)
     @token = encode_token(user_id: @user.id)
+    Rails.logger.info("\nUser created, user_id: #{@user.id}")
     render json: {
         user: UserSerializer.new(@user),
         token: @token
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
 
   def destroy
     current_user.destroy
+    Rails.logger.info("\nUser deleted: #{current_user}")
     render json: { message: "User deleted" }, status: :no_content
   end
 

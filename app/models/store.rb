@@ -3,6 +3,8 @@ class Store < ApplicationRecord
   has_many :products, dependent: :destroy
   has_many :categories, dependent: :destroy
 
+  validates :nome_fantasia, presence: true
+
   private
 
   def user_must_be_loja
